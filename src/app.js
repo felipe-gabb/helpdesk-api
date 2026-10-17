@@ -1,14 +1,12 @@
-const mysql = require("mysql2/promise");
-require("dotenv").config();
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
-
-module.exports = pool;
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const userRoutes = require("./routes/userRoutes");
+const errorMiddleware = require("./middlewares/errorMiddleware");
+const app = express();
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use('/users', userRoutes);
+app.use(errorMiddleware);
+module.exports = app;
