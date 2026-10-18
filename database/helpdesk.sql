@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS sistema_db;
+USE sistema_db;
+
+CREATE TABLE IF NOT EXISTS categorias (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  descricao VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS tecnicos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS solicitantes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  setor VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS chamados (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(150) NOT NULL,
+  descricao TEXT NOT NULL,
+  prioridade VARCHAR(20) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'ABERTO',
+  categoria_id INT NOT NULL,
+  tecnico_id INT,
+  solicitante_id INT NOT NULL,
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+  FOREIGN KEY (tecnico_id) REFERENCES tecnicos(id),
+  FOREIGN KEY (solicitante_id) REFERENCES solicitantes(id)
+);

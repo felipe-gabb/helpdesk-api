@@ -1,0 +1,58 @@
+@baseURL = http://localhost:3000
+@idSolicitante = 1
+@idChamado = 1
+
+GET {{baseURL}}/categorias
+
+
+
+GET {{baseURL}}/tecnicos
+
+
+
+GET {{baseURL}}/solicitantes
+
+
+
+GET {{baseURL}}/solicitantes/{{idSolicitante}}
+
+
+
+POST {{baseURL}}/solicitantes
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa",
+  "email": "ana.costa@example.com",
+  "setor": "TI"
+}
+
+
+PUT {{baseURL}}/solicitantes/{{idSolicitante}}
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa",
+  "email": "ana.costa@example.com",
+  "setor": "Suporte"
+}
+
+DELETE {{baseURL}}/solicitantes/{{idSolicitante}}
+
+### Criar chamado
+POST {{baseURL}}/chamados
+Content-Type: application/json
+
+{
+  "titulo": "Computador não liga",
+  "descricao": "O computador não liga ao apertar o botão.",
+  "prioridade": "ALTA",
+  "solicitante_id": 1,
+  "categoria_id": 1
+}
+
+### Listar chamados
+GET {{baseURL}}/chamados
+
+### Consultar um chamado
+GET {{baseURL}}/chamados/{{idChamado}}
